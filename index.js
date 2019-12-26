@@ -35,7 +35,8 @@ function loadAllScore() {
 
 function showStudentScores(studentIds) {
     const studentScores = getStudentScores(studentIds);
-    console.log(studentScores);
+    const summary = summaryStudentScoresTotal(studentScores);
+    console.log(summary);
 }
 
 function getStudentScores(studentIds) {
@@ -48,6 +49,14 @@ function getStudentScores(studentIds) {
         return findStudentInfo;
     });
     return studentScores;
+}
+
+function summaryStudentScoresTotal(studentScores) {
+    const studentScoreSummarys = studentScores.map(studentScore => studentScore.summary);
+    const totalAverage = studentScoreSummarys.reduce((sum, studentScoreSummary) => sum + studentScoreSummary) / studentScoreSummarys.length;
+    const totalMax = Math.max(...studentScoreSummarys);
+    const summary = { totalAverage: totalAverage, totalMax: totalMax };
+    return summary
 }
 
 const studnetIds = ["TWA20190101", "TWA20190102"]
