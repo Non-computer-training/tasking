@@ -36,7 +36,8 @@ function loadAllScore() {
 function showStudentScores(studentIds) {
     const studentScores = getStudentScores(studentIds);
     const summary = summaryStudentScoresTotal(studentScores);
-    console.log(summary);
+    const result = printStudentScores(studentScores, summary);
+    console.log(result)
 }
 
 function getStudentScores(studentIds) {
@@ -57,6 +58,19 @@ function summaryStudentScoresTotal(studentScores) {
     const totalMax = Math.max(...studentScoreSummarys);
     const summary = { totalAverage: totalAverage, totalMax: totalMax };
     return summary
+}
+
+function printStudentScores(studentScores, summary) {
+    let result = `成绩单
+姓名|数学|语文|英语|编程|平均分|总分 
+========================`
+    studentScores.forEach(studentScore => {
+        return result += `\n${studentScore.name}|${studentScore.math}|${studentScore.chinese}|${studentScore.english}|${studentScore.programming}|${studentScore.average}|${studentScore.summary}`;
+    });
+    result += `\n========================
+全班总分平均数：${summary.totalAverage}
+全班总分最高分：${summary.totalMax}`;
+    return result;
 }
 
 const studnetIds = ["TWA20190101", "TWA20190102"]
